@@ -1,6 +1,6 @@
 @font-face {
   font-family: 'Abibas';
-  src: url('./font/abibas/Abibas.ttf') format('truetype');
+  src: url('/font/abibas/Abibas.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
   font-display: swap; /* Migliora il caricamento nel browser evitando testo invisibile */
