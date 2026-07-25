@@ -1,0 +1,220 @@
+@font-face {
+  font-family: 'Abibas';
+  src: url('./font/abibas/Abibas.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap; /* Migliora il caricamento nel browser evitando testo invisibile */
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --color-bg: #FFFFFF;
+  --color-text: #1F2937;
+  --color-text-light: #6B7280;
+  --color-text-muted: #9CA3AF;
+  --gradient-primary: linear-gradient(135deg, #059669, #06B6D4);
+  --color-emerald: #059669;
+  --color-cyan: #06B6D4;
+  --font-body: 'Montserrat', sans-serif;
+  --font-logo: 'Abibas', cursive;
+  --radius-sm: 8px;
+  --radius-md: 20px;
+  --radius-lg: 16px;
+  --radius-full: 9999px;
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.08);
+  --shadow-md: 0 4px 12px rgba(0,0,0,0.12);
+}
+
+html, body, #root { height: 100%; }
+
+body {
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+}
+
+input, textarea, button { font-family: inherit; font-size: inherit; }
+button { transition: transform 0.15s; }
+button:active { transform: scale(0.96) !important; }
+
+
+/* === GLASS BUTTON MIXIN (come Toolbar.jsx) === */
+.btn-glass {
+  border: none; background-color: rgba(5,150,105,0.15);
+  background-image: linear-gradient(to bottom, rgba(255,255,255,0.7) 0%, rgba(255,255,255,0.1) 50%, rgba(255,255,255,0) 51%),radial-gradient(ellipse at center, rgba(5,150,105,0.3) 0%, rgba(6,182,212,0.15) 100%);
+  backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+  box-shadow: inset 0 -3px 5px rgba(0,0,0,0.1), inset 0 3px 5px rgba(255,255,255,0.4), 0 4px 10px rgba(0,0,0,0.12);
+  transition: transform 0.15s;
+}
+.btn-glass:active {
+  background-image: linear-gradient(to bottom, rgba(255,255,255,0.7) 0%, rgba(255,255,255,0.1) 50%, rgba(255,255,255,0) 51%),radial-gradient(ellipse at center, #059669 0%, #06B6D4 100%);
+  color: #fff; transform: scale(0.96);
+}
+.toolbar button:active {
+  background-image: linear-gradient(to bottom, rgba(255,255,255,0.7) 0%, rgba(255,255,255,0.1) 50%, rgba(255,255,255,0) 51%),radial-gradient(ellipse at center, #059669 0%, #06B6D4 100%) !important;
+  color: #fff !important;
+}
+
+/* Lock Screen */
+.lock-screen {
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  height: 100%; padding: 32px; gap: 20px;
+}
+.lock-logo {
+  font-family: var(--font-logo); font-size: 72px;
+  background: var(--gradient-primary);
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.lock-subtitle {
+  color: var(--color-text-light); font-size: 14px; text-align: center; margin-top: -24px;
+}
+.lock-biometric-btn {
+  color: var(--color-text); border-radius: var(--radius-full);
+  padding: 14px 32px; font-size: 15px; font-weight: 600;
+  cursor: pointer; display: flex; align-items: center; gap: 8px;
+}
+.lock-or-divider { color: var(--color-text-muted); font-size: 13px; }
+
+/* Pin Pad */
+.pin-dots {
+  display: flex; gap: 14px; justify-content: center;
+}
+.pin-dot {
+  width: 14px; height: 14px; border-radius: 50%;
+  border: 2px solid var(--color-text-light); transition: all 0.15s;
+}
+.pin-dot.filled {
+  background: var(--gradient-primary); border-color: transparent;
+}
+.pin-error { color: #DC2626; font-size: 13px; text-align: center; min-height: 20px; }
+.pin-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; max-width: 240px; width: 100%;
+  padding-bottom: 20px;
+}
+.pin-key {
+  aspect-ratio: 1; border-radius: var(--radius-full);
+  font-size: 24px; font-weight: 500; cursor: pointer; color: var(--color-text);
+  background: #ffffff38;
+  transition: all 0.1s ease;
+}
+.pin-key:active{
+  background: #ffffff38;
+  color: #1f29377d;
+}
+.pin-key-blank { background: transparent; cursor: default; border: none; backdrop-filter: none; }
+.pin-key-action { font-size: 16px; color: var(--color-text-light); }
+
+/* Gradient border wrapper */
+.g-border {
+  position: relative;
+}
+.g-border::before {
+  content: ''; position: absolute; inset: 0; border-radius: inherit;
+  background: var(--gradient-primary); z-index: -1;
+}
+.g-border-content {
+  position: relative; background: var(--color-bg); border-radius: inherit;
+  height: 100%;
+}
+
+/* Header */
+.header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 16px 20px; background: transparent; flex-shrink: 0;
+}
+.header-left { display: flex; align-items: baseline; gap: 12px; }
+.header-logo {
+  font-family: var(--font-logo); font-size: 28px;
+  font-family: 'Abibas', sans-serif;
+  background: var(--gradient-primary);
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent; line-height: 1;
+}
+.header-datetime { color: var(--color-text-muted); font-size: 12px; }
+.header-title { color: var(--color-text-light); font-size: 13px; font-weight: 500; }
+.header-btn {
+  cursor: pointer; padding: 16px 16px; border-radius: var(--radius-full);
+  font-size: 13px; font-weight: 600; color: var(--color-text);
+}
+
+/* Editor */
+.editor-wrapper { flex: 1; display: flex; flex-direction: column; }
+.editor-textarea {
+  flex: 1; border: none; outline: none;
+  padding: 8px 20px 80px; font-size: 16px; line-height: 1.8;
+  color: var(--color-text); background: transparent;
+  white-space: pre-wrap; overflow-y: auto;
+}
+.editor-textarea:empty:not(:focus)::before {
+  content: 'Scrivi...';
+  color: var(--color-text-muted);
+  pointer-events: none;
+}
+.editor-textarea ul {
+  padding-left: 24px;
+  margin: 0;
+}
+.editor-textarea li {
+  list-style-type: disc;
+}
+
+/* Toolbar */
+.toolbar {
+  position: fixed; bottom: 0; left: 0; right: 0;
+  display: flex; justify-content: center; gap: 14px;
+  padding: 12px 20px 28px; background: transparent;
+}
+
+/* List */
+.list-wrapper { flex: 1; display: flex; flex-direction: column; overflow-y: auto; }
+.list-content { flex: 1; padding: 8px 20px 100px; overflow-y: auto; display: flex; flex-direction: column; gap: 12px; }
+.list-empty {
+  flex: 1; display: flex; align-items: center; justify-content: center;
+  color: var(--color-text-muted); font-size: 14px; text-align: center; padding: 40px;
+}
+
+/* Entry Card */
+.entry-card {
+  border-radius: var(--radius-md); overflow: hidden;
+}
+.entry-card-inner {
+  padding: 14px 16px; cursor: pointer; border-radius: var(--radius-md);
+  background: #f5f5f5;
+  transition: all 0.2s ease;
+
+}
+.entry-card-date { font-size: 11px; color: var(--color-text-light); font-weight: 600; }
+.entry-card-preview { font-size: 14px; color: var(--color-text); margin-top: 4px; line-height: 1.5; }
+.entry-card-empty { font-size: 13px; color: var(--color-text-muted); font-style: italic; }
+.entry-card-inner:active{
+  transform: scale(0.98);
+  background: #f5f5f5;
+}
+
+/* Lock overlay */
+.lock-overlay {
+  position: fixed; inset: 0; background: #fff; z-index: 100;
+  display: flex; align-items: center; justify-content: center;
+}
+.lock-overlay-inner { text-align: center; }
+.lock-overlay-logo {
+  font-family: var(--font-logo); font-size: 48px;
+  background: var(--gradient-primary);
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.lock-overlay-text { color: var(--color-text-light); font-size: 13px; margin-top: 8px; }
