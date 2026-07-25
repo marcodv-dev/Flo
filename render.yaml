@@ -1,0 +1,15 @@
+services:
+  - type: static
+    name: Flo
+    repo: https://github.com/marcodv-dev/Flo
+    branch: master
+    buildCommand: npm run build
+    publishDir: dist
+    headers:
+      - path: /*
+        name: X-Frame-Options
+        value: DENY
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html
