@@ -89,25 +89,27 @@ export default function EditorView({ onSave, onNavigateList, initialHtml }) {
   return (
     <div className="editor-wrapper">
       <EditorHeader onList={onNavigateList} />
-      <div
-        ref={editorRef}
-        className="editor-textarea"
-        contentEditable
-        suppressContentEditableWarning
-        onKeyUp={syncState}
-        onMouseUp={syncState}
-        onInput={checkContent}
-      />
-      <Toolbar
-        listActive={listActive}
-        boldActive={boldActive}
-        saveDisabled={!hasContent}
-        onList={handleList}
-        onBold={handleBold}
-        onNewline={handleNewline}
-        onTimestamp={handleTimestamp}
-        onFinish={handleFinish}
-      />
+      <div className="editor-body">
+        <div
+          ref={editorRef}
+          className="editor-textarea"
+          contentEditable
+          suppressContentEditableWarning
+          onKeyUp={syncState}
+          onMouseUp={syncState}
+          onInput={checkContent}
+        />
+          <Toolbar
+          listActive={listActive}
+          boldActive={boldActive}
+          saveDisabled={!hasContent}
+          onList={handleList}
+          onBold={handleBold}
+          onNewline={handleNewline}
+          onTimestamp={handleTimestamp}
+          onFinish={handleFinish}
+        />
+      </div>
     </div>
   )
 }
