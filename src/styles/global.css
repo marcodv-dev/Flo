@@ -42,8 +42,10 @@ body {
 }
 
 #root {
+  position: fixed; inset: 0;
   display: flex;
   flex-direction: column;
+  overflow: hidden;
 }
 
 input, textarea, button { font-family: inherit; font-size: inherit; }
