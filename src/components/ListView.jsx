@@ -12,7 +12,7 @@ export default function ListView({ entries, loading, loadEntries, cryptoKey, onN
         {loading && <div className="list-empty">Caricamento...</div>}
         {!loading && entries.length === 0 && (
           <div className="list-empty">
-            Nessun pensiero ancora.<br />Tocca + Nuovo per iniziare.
+            Tocca + per iniziare.
           </div>
         )}
         {entries.map(e => (
