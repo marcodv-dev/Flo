@@ -1,4 +1,4 @@
-import { useState, useCallback } from 'react'
+import { useState, useCallback, useEffect } from 'react'
 import { useCrypto } from './hooks/useCrypto'
 import { useAutoLock } from './hooks/useAutoLock'
 import { useEntries } from './hooks/useEntries'
@@ -14,6 +14,15 @@ export default function App() {
   const [editingEntry, setEditingEntry] = useState(null)
 
   useAutoLock(lock)
+
+  useEffect(() => {
+    const vv = window.visualViewport
+    if (!vv) return
+    const onResize = () => document.documentElement.style.setProperty('--vh', `${vv.height}px`)
+    vv.addEventListener('resize', onResize)
+    onResize()
+    return () => vv.removeEventListener('resize', onResize)
+  }, [])
 
   const handleUnlock = useCallback(async (pinOrRawId) => {
     await unlock(pinOrRawId)
